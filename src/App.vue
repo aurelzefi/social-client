@@ -1,29 +1,45 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <router-view/>
 </template>
 
+<script>
+export default {
+
+}
+</script>
+
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  // Fonts
+  @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+  // Variables
+  @import "./assets/sass/variables";
+
+  // Bootstrap
+  @import "~bootstrap/scss/bootstrap";
+
+  body {
+    padding-top: 80px;
   }
-}
+
+  textarea {
+    resize: none;
+  }
+
+  .action-link {
+    cursor: pointer;
+  }
+
+  #media-modal img, #media-modal video {
+    max-height: 70vh;
+    max-width: 100%;
+  }
+
+  .avatar {
+    cursor: pointer;
+  }
+
+  .h-70vh {
+    height: 70vh;
+  }
 </style>
