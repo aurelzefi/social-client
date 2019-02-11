@@ -4,7 +4,7 @@
     <likes :post="post"/>
     <comment-create :post="post"/>
     <media :media="media"/>
-    <confirm id="post-confirm-modal" :action="deleteAction"/>
+    <confirm :action="deleteAction"/>
 
     <loader :yes="loading"/>
 
