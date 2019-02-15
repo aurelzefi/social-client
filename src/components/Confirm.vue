@@ -22,14 +22,6 @@
 
 <script>
 export default {
-  props: ['action'],
-
-  methods: {
-    confirm() {
-      this.action();
-
-      $('#confirm-modal').modal('hide');
-    }
-  },
+  props: ['confirm'],
 };
 </script>

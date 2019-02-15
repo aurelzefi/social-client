@@ -4,7 +4,7 @@
     <likes :post="post"/>
     <comment-create :post="post"/>
     <media :media="media"/>
-    <confirm :action="deleteAction"/>
+    <confirm :confirm="destroy"/>
 
     <loader :yes="loading"/>
 
@@ -230,10 +230,12 @@ export default {
     /**
      * The delete action to be completed on confirm.
      */
-    deleteAction() {
+    destroy() {
       axios.delete(`/posts/${this.post.id}`)
         .then(() => {
           this.posts.splice(this.posts.indexOf(this.post), 1);
+
+          $('#confirm-modal').modal('hide');
         });
     },
   },
