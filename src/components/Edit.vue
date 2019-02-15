@@ -54,6 +54,9 @@ export default {
 
   props: ['name', 'resource', 'callback'],
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       form: {
@@ -65,6 +68,9 @@ export default {
     };
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     $('#edit-modal').on('shown.bs.modal', () => {
       this.form.content = this.form.content.concat(this.resource.content);
@@ -78,10 +84,16 @@ export default {
   },
 
   methods: {
+    /**
+     * Remove the given file from the current files.
+     */
     removeFile(file) {
       this.form.current_files.splice(this.form.current_files.indexOf(file), 1);
     },
 
+    /**
+     * Update the resource.
+     */
     update() {
       this.form.errors = [];
 

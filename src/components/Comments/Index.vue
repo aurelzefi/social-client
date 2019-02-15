@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import Media from '../Media.vue';
 
 export default {
@@ -55,18 +54,13 @@ export default {
 
   props: ['comments', 'loading'],
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       media: null,
     };
-  },
-
-  computed: mapState([
-    'user',
-  ]),
-
-  methods: {
-
   },
 };
 </script>

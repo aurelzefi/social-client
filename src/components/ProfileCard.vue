@@ -37,6 +37,9 @@
 import { mapState } from 'vuex';
 
 export default {
+  /**
+   * The component's computed properties.
+   */
   computed: mapState([
     'user',
   ]),

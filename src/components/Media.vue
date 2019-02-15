@@ -25,6 +25,9 @@
 export default {
   props: ['media'],
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     $('body').on('hidden.bs.modal', '#media-modal', () => {
       if (this.$refs.video) {

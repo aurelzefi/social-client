@@ -30,6 +30,9 @@
 import { mapState } from 'vuex';
 
 export default {
+  /**
+   * The component's data.
+   */
   data() {
     return {
       suggestions: [],
@@ -37,23 +40,35 @@ export default {
     };
   },
 
+  /**
+   * The component's computed properties.
+   */
   computed: {
     ...mapState([
       'user',
     ]),
   },
 
+  /**
+   * The properties to watch for changes.
+   */
   watch: {
     'user.followees'() {
       this.getSuggestions();
     },
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     this.getSuggestions();
   },
 
   methods: {
+    /**
+     * Get the suggestions.
+     */
     getSuggestions() {
       this.loading = true;
 
@@ -64,6 +79,9 @@ export default {
         });
     },
 
+    /**
+     * Follow the given user.
+     */
     follow(user) {
       axios.post(`/users/${user.id}/follow`)
         .then((response) => {

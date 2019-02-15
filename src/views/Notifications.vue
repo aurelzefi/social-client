@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import Layout from '../layouts/Home.vue';
 
 export default {
@@ -95,6 +95,9 @@ export default {
     }
   },
 
+  /**
+   * Clean after the component is destroyed.
+   */
   destroyed() {
     if (this.user) {
       echo.leave(`user.${this.user.id}`);
@@ -105,19 +108,12 @@ export default {
 
   methods: {
     /**
-     * The store's mutations.
+     * Map the mutations from the store.
      */
     ...mapMutations([
       'removeNotification',
       'addNotification',
       'listenForEvents',
-    ]),
-
-    /**
-     * The store's actions.
-     */
-    ...mapActions([
-      'getConversations',
     ]),
 
     /**

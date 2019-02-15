@@ -61,6 +61,9 @@ import Errors from '../../components/Errors.vue';
 export default {
   components: { Errors },
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       form: {
@@ -73,11 +76,17 @@ export default {
     };
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = 'Password Settings - MySocial';
   },
 
   methods: {
+    /**
+     * Update the password for the user.
+     */
     update() {
       this.form.errors = [];
       this.form.success = false;

@@ -38,6 +38,9 @@ import Errors from '../components/Errors.vue';
 export default {
   components: { Layout, Posts, Errors },
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       form: {
@@ -54,10 +57,16 @@ export default {
     };
   },
 
+  /**
+   * The component's computed properties.
+   */
   computed: mapState([
     'user',
   ]),
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = 'Home - MySocial';
 
@@ -71,6 +80,9 @@ export default {
   },
 
   methods: {
+    /**
+     * Get the posts.
+     */
     getPosts() {
       if (this.page === 1) {
         this.loading = true;
@@ -99,6 +111,9 @@ export default {
         });
     },
 
+    /**
+     * Store the post.
+     */
     post() {
       this.form.errors = [];
 

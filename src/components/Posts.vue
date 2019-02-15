@@ -1,6 +1,6 @@
 <template>
   <div>
-    <edit name="posts" :resource="post" :callback="updateCallback"/>
+    <edit name="posts" :resource="post" :callback="update"/>
     <likes :post="post"/>
     <comment-create :post="post"/>
     <media :media="media"/>
@@ -164,7 +164,7 @@ export default {
     },
 
     /**
-     * Show the modal to create a new comment.
+     * Show the form to create a new comment.
      */
     createComment(post) {
       this.post = post;
@@ -203,7 +203,7 @@ export default {
     },
 
     /**
-     * Show the edit modal.
+     * Show the form the edit the post.
      */
     showEditModal(post) {
       this.post = post;
@@ -221,14 +221,14 @@ export default {
     },
 
     /**
-     * The callback to be executed after the update.
+     * Update the given post.
      */
-    updateCallback(post) {
+    update(post) {
       this.$set(this.posts, this.posts.indexOf(this.post), post);
     },
 
     /**
-     * The delete action to be completed on confirm.
+     * Delete the post.
      */
     destroy() {
       axios.delete(`/posts/${this.post.id}`)

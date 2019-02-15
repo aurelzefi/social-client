@@ -63,6 +63,9 @@ import Errors from '../../components/Errors.vue';
 export default {
   components: { Layout, Errors },
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       form: {
@@ -73,16 +76,25 @@ export default {
     };
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = 'Login - MySocial';
   },
 
   methods: {
+    /**
+     * Map the mutations from the store.
+     */
     ...mapMutations([
       'authenticate',
       'listenForEvents',
     ]),
 
+    /**
+     * Log the user into the application.
+     */
     login() {
       this.form.errors = [];
 
@@ -97,6 +109,9 @@ export default {
         });
     },
 
+    /**
+     * Get the after login redirect path.
+     */
     redirectPath() {
       return this.$route.query.redirect ? this.$route.query.redirect : '/home';
     },

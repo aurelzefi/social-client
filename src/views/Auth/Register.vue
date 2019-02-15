@@ -74,6 +74,9 @@ import Errors from '../../components/Errors.vue';
 export default {
   components: { Layout, Errors },
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       form: {
@@ -86,16 +89,25 @@ export default {
     };
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = 'Register - MySocial';
   },
 
   methods: {
+    /**
+     * Map the mutations from the store.
+     */
     ...mapMutations([
       'authenticate',
       'listenForEvents',
     ]),
 
+    /**
+     * Register a new user into the application.
+     */
     register() {
       this.form.errors = [];
 

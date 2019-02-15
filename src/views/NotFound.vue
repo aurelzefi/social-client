@@ -22,6 +22,9 @@ import Layout from '../layouts/Main.vue';
 export default {
   components: { Layout },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = 'Page Not Found - MySocial';
   },

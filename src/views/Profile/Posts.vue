@@ -12,6 +12,9 @@ export default {
 
   props: ['id', 'user'],
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       posts: [],
@@ -23,12 +26,18 @@ export default {
     };
   },
 
+  /**
+   * The properties to watch for changes.
+   */
   watch: {
     id() {
       this.getPosts();
     },
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = `${this.user.name} - Posts - MySocial`;
 
@@ -42,6 +51,9 @@ export default {
   },
 
   methods: {
+    /**
+     * Get the posts.
+     */
     getPosts() {
       if (this.page === 1) {
         this.loading = true;

@@ -60,29 +60,44 @@ export default {
 
   props: ['id'],
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       user: null,
     };
   },
 
+  /**
+   * The properties to watch for changes.
+   */
   watch: {
     id() {
       this.getUser();
     },
   },
 
+  /**
+   * The component's computed properties.
+   */
   computed: {
     ...mapState({
       auth: 'user',
     }),
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     this.getUser();
   },
 
   methods: {
+    /**
+     * Get the user.
+     */
     getUser() {
       axios.get(`/users/${this.id}`)
         .then((response) => {
@@ -90,7 +105,9 @@ export default {
         });
     },
 
-
+    /**
+     * Follow the given user.
+     */
     follow(followee) {
       axios.post(`/users/${followee.id}/follow`)
         .then((response) => {
@@ -99,6 +116,9 @@ export default {
         });
     },
 
+    /**
+     * Unfollow the given user.
+     */
     unfollow(followee) {
       axios.delete(`/users/${followee.id}/unfollow`)
         .then(() => {
@@ -107,6 +127,9 @@ export default {
         });
     },
 
+    /**
+     * Remove the given followee from the user's followees.
+     */
     removeFollowee(followee) {
       this.auth.followees.splice(this.auth.followees.indexOf(
         this.auth.followees.find(user => user.id === followee.id),

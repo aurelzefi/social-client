@@ -37,6 +37,9 @@ export default {
 
   props: ['post'],
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       form: {
@@ -47,6 +50,9 @@ export default {
     };
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     $('#comment-create-modal').on('shown.bs.modal', () => {
       $('#comment-create-content').focus();
@@ -59,6 +65,9 @@ export default {
   },
 
   methods: {
+    /**
+     * Store the comment.
+     */
     store() {
       this.form.errors = [];
 

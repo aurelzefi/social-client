@@ -14,6 +14,9 @@ export default {
 
   props: ['user', 'type'],
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       relations: [],
@@ -21,29 +24,44 @@ export default {
     };
   },
 
+  /**
+   * The component's computed properties.
+   */
   computed: {
     ...mapState({
       auth: 'user',
     }),
   },
 
+  /**
+   * The properties to watch for changes.
+   */
   watch: {
     type() {
       this.prepareComponent();
     },
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     this.prepareComponent();
   },
 
   methods: {
+    /**
+     * Prepare the component.
+     */
     prepareComponent() {
       document.title = `${this.user.name} - ${this.ucfirst(this.type)} - MySocial`;
 
       this.getRelations();
     },
 
+    /**
+     * Get the relations.
+     */
     getRelations() {
       this.loading = true;
 

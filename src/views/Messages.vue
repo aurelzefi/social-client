@@ -128,6 +128,9 @@ import Media from '../components/Media.vue';
 export default {
   components: { Layout, Media },
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       form: {
@@ -148,10 +151,16 @@ export default {
     };
   },
 
+  /**
+   * The component's computed properties.
+   */
   computed: mapState([
     'user',
   ]),
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = 'Messages - MySocial';
 
@@ -174,6 +183,9 @@ export default {
       });
   },
 
+  /**
+   * Clean after the component is destroyed.
+   */
   destroyed() {
     if (this.user) {
       echo.leave(`user.${this.user.id}`);
@@ -182,6 +194,9 @@ export default {
     }
   },
 
+  /**
+   * Update the component.
+   */
   updated() {
     if (this.$refs.messages) {
       this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
@@ -189,10 +204,16 @@ export default {
   },
 
   methods: {
+    /**
+     * Map the mutations from the store.
+     */
     ...mapMutations([
       'listenForEvents',
     ]),
 
+    /**
+     * Get the conversations.
+     */
     getConversations() {
       this.loadingConversations = true;
 
@@ -203,6 +224,9 @@ export default {
         });
     },
 
+    /**
+     * Update the conversations.
+     */
     updateConversations(id, type) {
       axios.get(`/conversations/${id}`)
         .then((response) => {
@@ -239,6 +263,9 @@ export default {
         });
     },
 
+    /**
+     * Get the messages for the given conversation.
+     */
     getMessagesForConversation(conversation) {
       if (this.active !== conversation.id) {
         this.messages = [];
@@ -258,12 +285,18 @@ export default {
       }
     },
 
+    /**
+     * Remove the unread messages from the opening conversation.
+     */
     updateUnreadMessages() {
       this.user.unread_messages = this.user.unread_messages.filter(
         message => message.sender_id !== this.form.receiver_id
       );
     },
 
+    /**
+     * Send the message.
+     */
     send() {
       const formData = new FormData();
 
@@ -284,6 +317,9 @@ export default {
         });
     },
 
+    /**
+     * Mark the given conversation as read.
+     */
     readConversation(conversation) {
       axios.put(`/conversations/${this.form.receiver_id}`)
         .then((response) => {
@@ -291,6 +327,9 @@ export default {
         });
     },
 
+    /**
+     * Get the users matching the query string.
+     */
     getResults() {
       if (this.query.length === 0) {
         this.users = [];
@@ -305,10 +344,16 @@ export default {
         });
     },
 
+    /**
+     * Determine if the given conversation is active.
+     */
     isActive(conversation) {
       return this.active && this.active.id === conversation.id;
     },
 
+    /**
+     * Get the conversationalist from the given conversation.
+     */
     conversationalist(conversation) {
       return this.user.id === conversation.sender.id ? conversation.receiver : conversation.sender;
     },
@@ -320,6 +365,9 @@ export default {
       return this.user.id === conversation.receiver_id && !conversation.read_at;
     },
 
+    /**
+     * Start a conversation with the given user.
+     */
     startConversation(user) {
       this.form.receiver_id = user.id;
       this.messages = [];

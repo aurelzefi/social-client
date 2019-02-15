@@ -73,6 +73,9 @@ import Errors from '../../components/Errors.vue';
 export default {
   components: { Errors },
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       avatarForm: {
@@ -87,15 +90,19 @@ export default {
         errors: [],
         success: false,
       },
-
-      deleteAction: null,
     };
   },
 
+  /**
+   * The component's computed properties.
+   */
   computed: mapState([
     'user',
   ]),
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = 'Account Settings - MySocial';
 
@@ -104,10 +111,16 @@ export default {
   },
 
   methods: {
+    /**
+     * Map the mutations from the store.
+     */
     ...mapMutations([
       'setUser',
     ]),
 
+    /**
+     * Update the avatar for the user.
+     */
     updateAvatar() {
       this.avatarForm.errors = [];
       this.avatarForm.success = false;
@@ -127,6 +140,9 @@ export default {
         });
     },
 
+    /**
+     * Update the account data for the user.
+     */
     updateAccount() {
       this.accountForm.errors = [];
       this.accountForm.success = false;
@@ -143,10 +159,16 @@ export default {
         });
     },
 
+    /**
+     * Open the file browser to choose the avatar.
+     */
     openFileBrowser() {
       this.$refs.file.click();
     },
 
+    /**
+     * Add the chosen file to the form.
+     */
     handleFile() {
       this.avatarForm.file = this.$refs.file.files[0];
     },

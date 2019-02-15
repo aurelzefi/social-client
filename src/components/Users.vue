@@ -44,6 +44,9 @@ import { mapState } from 'vuex';
 export default {
   props: ['user', 'users', 'loading', 'message'],
 
+  /**
+   * The component's computed properties.
+   */
   computed: {
     isProfile() {
       return typeof this.user !== 'undefined';
@@ -84,7 +87,7 @@ export default {
     },
 
     /**
-     * Remove the followee from the user's followees.
+     * Remove the given followee from the user's followees.
      */
     removeFollowee(followee) {
       this.auth.followees.splice(this.auth.followees.indexOf(

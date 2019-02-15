@@ -21,6 +21,9 @@ import Posts from '../components/Posts.vue';
 export default {
   components: { Layout, Users, Posts },
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       results: {
@@ -31,12 +34,18 @@ export default {
     };
   },
 
+  /**
+   * The properties to watch for changes.
+   */
   watch: {
     '$route.query.query': function () {
       this.getResults();
     },
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     document.title = `${this.$route.query.query} - MySocial`;
 
@@ -44,14 +53,15 @@ export default {
   },
 
   methods: {
+    /**
+     * Get the results for the query string.
+     */
     getResults() {
       if (this.$route.query.query.length > 0) {
         this.loading = true;
 
-        this.results = {
-          users: [],
-          posts: [],
-        };
+        this.results.users = [];
+        this.results.posts = [];
 
         axios.get(`/search?query=${this.$route.query.query}`)
           .then((response) => {

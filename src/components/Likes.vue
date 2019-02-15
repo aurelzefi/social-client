@@ -29,6 +29,9 @@ export default {
 
   props: ['post'],
 
+  /**
+   * The component's data.
+   */
   data() {
     return {
       likes: [],
@@ -36,6 +39,9 @@ export default {
     };
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     $('#likes-modal').on('shown.bs.modal', () => {
       this.getLikes();
@@ -47,6 +53,9 @@ export default {
   },
 
   methods: {
+    /**
+     * Get the likes for the post.
+     */
     getLikes() {
       this.loading = true;
 

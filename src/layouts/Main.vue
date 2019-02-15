@@ -83,6 +83,9 @@
 import { mapState, mapGetters, mapMutations } from 'vuex';
 
 export default {
+  /**
+   * The component's data.
+   */
   data() {
     return {
       query: '',
@@ -92,6 +95,9 @@ export default {
     };
   },
 
+  /**
+   * The component's computed properties.
+   */
   computed: {
     ...mapState([
       'user',
@@ -102,6 +108,9 @@ export default {
     ]),
   },
 
+  /**
+   * Mount the component.
+   */
   mounted() {
     this.query = this.$route.query.query ? this.$route.query.query : '';
 
@@ -113,10 +122,16 @@ export default {
   },
 
   methods: {
+    /**
+     * Map the mutations from the store.
+     */
     ...mapMutations([
       'unsetUser',
     ]),
 
+    /**
+     * Log the user out of the application.
+     */
     logout() {
       axios.post('/logout').then(() => {
         echo.leave(`user.${this.user.id}`);
@@ -131,12 +146,18 @@ export default {
       });
     },
 
+    /**
+     * Search results for the query string.
+     */
     search() {
       if (this.query.length > 0) {
         this.$router.push(`/search?query=${this.query}`);
       }
     },
 
+    /**
+     * Get users that match the query string.
+     */
     getResults(e) {
       if (this.query.length === 0 || e.key === 'Enter') {
         this.users = [];
