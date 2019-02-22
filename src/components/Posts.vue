@@ -3,7 +3,7 @@
     <edit name="posts" :resource="post" :callback="update"/>
     <likes :post="post"/>
     <comment-create :post="post"/>
-    <media :media="media"/>
+    <media id="post-media-modal" :media="media"/>
     <confirm :confirm="destroy"/>
 
     <loader :yes="loading"/>
@@ -17,7 +17,7 @@
           v-for="post in posts" :key="post.id">
         <router-link :to="`/users/${post.user.id}/posts`">
           <img :src="avatar(post.user)" class="rounded-circle mr-3" width="50" height="50"
-               :alt="post.user.name">
+               :alt="`${post.user.name}'s Avatar`">
         </router-link>
 
         <div class="media-body">
@@ -45,9 +45,9 @@
                 || isOdd(post.files.length) && isNotLast(post.files, file),
                  'col-lg-12': isOdd(post.files.length) && ! isNotLast(post.files, file)}"
                  v-for="file in post.files" :key="file.id">
-              <a class="action-link" role="button" @click.prevent="showMedia(file)">
-                <img style="width: 100%;" :src="path(file)" :alt="file.name" v-if="isImage(file)">
-                <video style="width: 100%;" v-if="! isImage(file)">
+              <a class="action-link" role="button" @click="showMedia(file, '#post-media-modal')">
+                <img class="w-100" :src="path(file)" :alt="file.name" v-if="isImage(file)">
+                <video class="w-100" v-if="! isImage(file)">
                   <source :src="path(file)">
                 </video>
               </a>
@@ -199,11 +199,13 @@ export default {
 
             this.$set(this.posts, this.posts.indexOf(post), post);
           });
+      } else {
+        post.comments = [];
       }
     },
 
     /**
-     * Show the form the edit the post.
+     * Show the form to edit the post.
      */
     showEditModal(post) {
       this.post = post;

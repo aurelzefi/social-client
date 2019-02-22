@@ -73,7 +73,7 @@ export default {
    */
   mounted() {
     $('#edit-modal').on('shown.bs.modal', () => {
-      this.form.content = this.form.content.concat(this.resource.content);
+      this.form.content = this.resource.content;
       this.form.current_files = [].concat(this.resource.files);
     });
 

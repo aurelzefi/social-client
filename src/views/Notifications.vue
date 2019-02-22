@@ -2,25 +2,25 @@
   <layout>
     <h5>Notifications</h5>
 
-    <ul class="list-unstyled mt-3" v-if="notifications.length && ! loading">
+    <ul class="list-unstyled mt-3" v-if="notifications.length">
       <li class="media" :class="{ 'mb-3': isNotLast(notifications, notification) }"
           v-for="notification in notifications" :key="notification.id">
         <router-link :to="`/users/${notification.data.id}/posts`"
                      v-if="notification.type === 'App\\Notifications\\PostLiked'">
           <img :src="avatar(notification.data)" class="rounded-circle mr-3" width="50"
-               height="50" :alt="notification.data.name">
+               height="50" :alt="`${notification.data.name}'s Avatar`">
         </router-link>
 
         <router-link :to="`/users/${notification.data.user.id}/posts`"
                      v-if="notification.type === 'App\\Notifications\\PostCommented'">
           <img :src="avatar(notification.data.user)" class="rounded-circle mr-3" width="50"
-               height="50" :alt="notification.data.user.name">
+               height="50" :alt="`${notification.data.user.name}'s Avatar`">
         </router-link>
 
         <router-link :to="`/users/${notification.data.id}/posts`"
                      v-if="notification.type === 'App\\Notifications\\UserFollowed'">
           <img :src="avatar(notification.data)" class="rounded-circle mr-3" width="50"
-               height="50" :alt="notification.data.name">
+               height="50" :alt="`${notification.data.name}'s Avatar`">
         </router-link>
 
         <div class="media-body">
@@ -85,7 +85,7 @@ export default {
     echo.private(`user.${this.user.id}`)
       .notification((notification) => {
         this.getNotification(notification);
-        this.removeNotification();
+        this.decrementNotifications();
       });
 
     if (this.hasUnreadNotifications()) {
@@ -111,8 +111,8 @@ export default {
      * Map the mutations from the store.
      */
     ...mapMutations([
-      'removeNotification',
-      'addNotification',
+      'decrementNotifications',
+      'incrementNotifications',
       'listenForEvents',
     ]),
 

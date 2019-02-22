@@ -2,27 +2,27 @@
   <div>
     <h5>Who To Follow</h5>
 
-    <ul class="list-unstyled mt-3" v-if="suggestions.length && ! loading">
-      <li class="media" :class="{ 'mb-3': isNotLast(suggestions, suggestion) }"
-          v-for="suggestion in suggestions" :key="suggestion.id">
-        <router-link class="align-self-center" :to="`/users/${suggestion.id}/posts`">
-          <img :src="avatar(suggestion)" class="rounded-circle mr-3"
-               width="50" height="50" :alt="suggestion.name">
+    <loader :yes="loading"/>
+
+    <ul class="list-unstyled mt-3" v-if="suggestions.length">
+      <li class="media" :class="{ 'mb-3': isNotLast(suggestions, user) }"
+          v-for="user in suggestions" :key="user.id">
+        <router-link class="align-self-center" :to="`/users/${user.id}/posts`">
+          <img :src="avatar(user)" class="rounded-circle mr-3"
+               width="50" height="50" :alt="`${user.name}'s Avatar`">
         </router-link>
 
         <div class="media-body">
           <h6 class="mt-0 mb-1">
-            <router-link :to="`/users/${suggestion.id}/posts`">{{ suggestion.name }}</router-link>
+            <router-link :to="`/users/${user.id}/posts`">{{ user.name }}</router-link>
           </h6>
 
-          <button type="button" class="btn btn-outline-primary btn-sm" @click="follow(suggestion)">
+          <button type="button" class="btn btn-outline-primary btn-sm" @click="follow(user)">
             Follow
           </button>
         </div>
       </li>
     </ul>
-
-    <loader :yes="loading"/>
   </div>
 </template>
 

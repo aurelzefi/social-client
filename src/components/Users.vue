@@ -6,12 +6,12 @@
       {{ message }}
     </div>
 
-    <ul class="list-unstyled mb-0" v-if="users.length && ! loading">
+    <ul class="list-unstyled mb-0" v-if="users.length">
       <li class="media" :class="{ 'mb-3': isNotLast(users, user) }"
           v-for="user in users" :key="user.id">
         <router-link :to="`/users/${user.id}/posts`" data-dismiss="modal">
           <img :src="avatar(user)" class="rounded-circle mr-3" width="50" height="50"
-               :alt="user.name">
+               :alt="`${user.name}'s Avatar`">
         </router-link>
 
         <div class="media-body">

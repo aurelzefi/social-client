@@ -59,14 +59,14 @@ export default new Vuex.Store({
     /**
      * Increment the notifications count.
      */
-    addNotification(state) {
+    incrementNotifications(state) {
       state.user.unread_notifications_count += 1;
     },
 
     /**
      * Decrement the notifications count.
      */
-    removeNotification(state) {
+    decrementNotifications(state) {
       state.user.unread_notifications_count -= 1;
     },
   },

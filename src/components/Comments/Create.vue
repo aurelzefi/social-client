@@ -17,6 +17,7 @@
           </div>
           <div class="modal-footer">
             <input type="file" class="d-none" ref="files" multiple @change="handleFiles">
+
             <button type="button" class="btn btn-outline-primary" @click="openFileBrowser">
               Add Files
             </button>

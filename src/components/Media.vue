@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" id="media-modal" tabindex="-1" role="dialog" v-if="media">
+  <div :id="id" class="modal" tabindex="-1" role="dialog" v-if="media">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,8 +8,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <img class="mx-auto media" :src="path(media)" :alt="media.name" v-if="isImage(media)">
-          <video class="media" v-if="! isImage(media)" ref="video" controls autoplay>
+          <img class="mw-100 mh-70vh mx-auto d-block" :src="path(media)"
+               :alt="media.name" v-if="isImage(media)">
+
+          <video class="mw-100 mh-70vh" v-if="! isImage(media)" ref="video" controls autoplay>
             <source :src="path(media)">
           </video>
         </div>
@@ -23,13 +25,13 @@
 
 <script>
 export default {
-  props: ['media'],
+  props: ['id', 'media'],
 
   /**
    * Mount the component.
    */
   mounted() {
-    $('body').on('hidden.bs.modal', '#media-modal', () => {
+    $('body').on('hidden.bs.modal', `#${this.id}`, () => {
       if (this.$refs.video) {
         this.$refs.video.pause();
       }

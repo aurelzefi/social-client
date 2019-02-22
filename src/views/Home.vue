@@ -4,9 +4,9 @@
       <div class="card-header">Create Post</div>
 
       <div class="card-body">
-        <form @submit.prevent="post">
-          <errors :errors="form.errors"/>
+        <errors :errors="form.errors"/>
 
+        <form @submit.prevent="post">
           <div class="form-group">
             <textarea class="form-control" placeholder="Share something..."
                       rows="4" v-model="form.content"></textarea>

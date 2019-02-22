@@ -13,8 +13,11 @@
         <form @submit.prevent="updateAvatar">
           <div class="form-group text-center">
             <input type="file" class="d-none" ref="file" @change="handleFile">
-            <img class="rounded-circle avatar" height="200" width="200" :src="avatar(user)"
-                 @click="openFileBrowser">
+
+            <a class="action-link" @click="openFileBrowser">
+              <img class="rounded-circle" height="200" width="200"
+                   :src="avatar(user)" alt="Your Avatar">
+            </a>
           </div>
 
           <div class="form-group mb-0 text-center">

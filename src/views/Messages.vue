@@ -1,12 +1,19 @@
 <template>
   <layout>
-    <media :media="media"/>
+    <media id="message-media-modal" :media="media"/>
 
     <div class="container-fluid">
       <div class="row justify-content-center mb-4">
         <div class="col-md-4 col-lg-3 mb-4">
           <div class="card">
             <div class="card-header">Conversations</div>
+
+            <loader :yes="loadingConversations"/>
+
+            <div class="card-body text-center"
+                 v-if="! conversations.length && ! loadingConversations">
+              You don't have any conversations.
+            </div>
 
             <ul class="list-group list-group-flush overflow-auto h-70vh"
                 v-if="conversations.length">
@@ -37,20 +44,14 @@
               </li>
             </ul>
 
-            <loader :yes="loadingConversations"/>
-
-            <div class="card-body text-center" v-if="! conversations.length && ! loadingConversations">
-              You don't have any conversations.
-            </div>
-
             <div class="card-footer">
-              <div class="position-absolute" style="bottom: 55px; z-index: 1080;">
+              <div class="position-absolute messages-search">
                 <div class="list-group" v-if="showSearch">
                   <a class="list-group-item list-group-item-action action-link user-action-link"
                                :to="`/users/${user.id}/posts`" v-for="user in users"
                      :key="user.id" @click="startConversation(user)">
                     <img :src="avatar(user)" class="rounded-circle mr-2" width="30" height="30"
-                         :alt="user.name">
+                         :alt="`${user.name}'s Avatar`">
                     {{ user.name }}
                   </a>
                 </div>
@@ -67,8 +68,14 @@
           <div class="card">
             <div class="card-header">Messages</div>
 
+            <loader :yes="loadingMessages"/>
+
+            <div class="card-body h-70vh text-center" v-if="! messages.length && ! loadingMessages">
+              Choose someone and start/continue a conversation.
+            </div>
+
             <div class="card-body overflow-auto h-70vh" ref="messages" v-if="messages.length">
-              <div class="row" style="bottom: 10px;" v-for="message in messages" :key="message.id">
+              <div class="row" v-for="message in messages" :key="message.id">
                 <div class="col">
                   <div class="col-6" :class="{ 'float-right': user.id === message.sender_id }">
                     <p :class="{ 'mb-0': message.files.length }" v-if="message.content">
@@ -77,7 +84,7 @@
 
                     <div class="row" v-if="message.files.length">
                       <div class="col py-1" v-for="file in message.files" :key="file.id">
-                        <a class="action-link" @click="showMedia(file)">
+                        <a class="action-link" @click="showMedia(file, '#message-media-modal')">
                           <img class="mw-100" :src="path(file)"
                                :alt="file.name" v-if="isImage(file)">
                           <video class="mw-100" v-if="! isImage(file)">
@@ -89,12 +96,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-
-            <loader :yes="loadingMessages"/>
-
-            <div class="card-body h-70vh text-center " v-if="! messages.length && ! loadingMessages">
-                Choose someone and start/continue a conversation.
             </div>
 
             <div class="card-footer" v-if="form.receiver_id">

@@ -5,7 +5,7 @@
 <script>
 export default {
 
-}
+};
 </script>
 
 <style lang="scss">
@@ -30,13 +30,17 @@ export default {
     cursor: pointer;
   }
 
-  #media-modal img, #media-modal video {
-    max-height: 70vh;
-    max-width: 100%;
+  .messages-search {
+    bottom: 55px;
+    z-index: 1080;
   }
 
-  .avatar {
-    cursor: pointer;
+  .top-50 {
+    top: 50px;
+  }
+
+  .mh-70vh {
+    max-height: 70vh;
   }
 
   .h-70vh {

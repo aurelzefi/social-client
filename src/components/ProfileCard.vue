@@ -2,7 +2,7 @@
   <div>
     <div class="media mb-2">
       <router-link :to="`/users/${user.id}/posts`">
-        <img class="rounded-circle mr-3" :src="avatar(user)" :alt="user.name"
+        <img class="rounded-circle mr-3" :src="avatar(user)" :alt="`${user.name}'s Avatar`"
              height="64" width="64">
       </router-link>
 

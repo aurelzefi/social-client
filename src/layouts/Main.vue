@@ -14,12 +14,12 @@
             </div>
           </div>
 
-          <div class="position-absolute" style="top: 50px;">
+          <div class="position-absolute top-50">
             <div class="list-group" v-if="showSearch">
               <router-link class="list-group-item list-group-item-action"
                            :to="`/users/${user.id}/posts`" v-for="user in users" :key="user.id">
                 <img :src="avatar(user)" class="rounded-circle mr-2" width="30" height="30"
-                     :alt="user.name">
+                     :alt="`${user.name}'s Avatar`">
                 {{ user.name }}
               </router-link>
             </div>
@@ -59,7 +59,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle action-link" id="navbarDropdown" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="rounded-circle" :src="avatar(user)" width="20" heigth="20">
+                <img class="rounded-circle" :src="avatar(user)" width="20" height="20">
               </a>
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

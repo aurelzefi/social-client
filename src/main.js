@@ -113,10 +113,10 @@ Vue.mixin({
     /**
      * Show the given media.
      */
-    showMedia(media) {
+    showMedia(media, modal) {
       this.media = media;
 
-      $('#media-modal').modal('show');
+      $(modal).modal('show');
     },
 
     /**

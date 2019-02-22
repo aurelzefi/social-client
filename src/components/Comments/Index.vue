@@ -1,6 +1,6 @@
 <template>
   <div>
-    <media :media="media"/>
+    <media id="comment-media-modal" :media="media"/>
 
     <loader :yes="loading"/>
 
@@ -8,12 +8,12 @@
       This post does not have any comments.
     </div>
 
-    <ul class="list-unstyled mt-2" v-if="comments.length && ! loading">
+    <ul class="list-unstyled mt-2" v-if="comments.length">
       <li class="media" :class="{ 'mb-3': isNotLast(comments, comment) }"
           v-for="comment in comments" :key="comment.id">
         <router-link :to="`/users/${comment.user.id}/posts`">
           <img :src="avatar(comment.user)" class="rounded-circle mr-3" width="25" height="25"
-               :alt="comment.user.name">
+               :alt="`${comment.user.name}'s Avatar`">
         </router-link>
 
         <div class="media-body">
@@ -32,9 +32,9 @@
                 || isOdd(comment.files.length) && isNotLast(comment.files, file),
                  'col-lg-12': isOdd(comment.files.length) && ! isNotLast(comment.files, file)}"
                  v-for="file in comment.files" :key="file.id">
-              <a class="action-link" role="button" @click.prevent="showMedia(file)">
-                <img style="max-width: 100%;" :src="path(file)" :alt="file.name" v-if="isImage(file)">
-                <video style="max-width: 100%;" v-if="! isImage(file)">
+              <a class="action-link" role="button" @click="showMedia(file, '#comment-media-modal')">
+                <img class="mw-100" :src="path(file)" :alt="file.name" v-if="isImage(file)">
+                <video class="mw-100" v-if="! isImage(file)">
                   <source :src="path(file)">
                 </video>
               </a>
