@@ -1,3 +1,3 @@
-## Description
+## Social Network Client
 
-This is the client side of a social network application built as a RESTful API. It is an SPA app built with Vue. It uses websockets with Pusher to handle real-time events like messages and notifications.
+This is a client for a fake social network application.
